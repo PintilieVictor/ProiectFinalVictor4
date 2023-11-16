@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Confirm Deletion</title>
+</head>
+<body>
+<h2>Are you sure you want to delete your account, <span th:text="${user.username}"></span>?</h2>
+<form action="/delete-account" method="post">
+  <!-- Display confirmation message or user details -->
+  <p>Are you sure you want to delete your account?</p>
+  <!-- Add a CSRF token if using Spring Security -->
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+  <button type="submit">Delete Account</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Your Journal Entries</title>
+</head>
+<body>
+<h1>Your Journal Entries:</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody th:each="entry : ${journalEntries}">
+  <tr>
+    <td th:text="${entry.title}"></td>
+    <td th:text="${entry.content}"></td>
+    <td>
+      <a th:href="@{/edit-journal/{entryId}(entryId=${entry.id})}">Edit</a>
+      <a th:href="@{/delete-journal/{entryId}(entryId=${entry.id})}">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/add-journal}">Add New Journal Entry</a>
+<a th:href="@{/user-account}">Back to User Account</a>
+</body>
+</html>
