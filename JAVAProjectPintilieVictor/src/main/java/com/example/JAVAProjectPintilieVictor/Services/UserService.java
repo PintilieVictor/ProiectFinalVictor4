@@ -19,13 +19,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void deleteUser(User user) {
-        if (user != null) {
-            userRepository.delete(user);
-        } else {
-            throw new IllegalArgumentException("User cannot be null");
-        }
-    }
+
 
     public User saveUser(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -57,10 +51,9 @@ public class UserService {
             return userRepository.save(existingUser);
         }
 
-        public Long getTotalUsers() {
-            return userRepository.count();
-        }
-
+    public Long getTotalUsers() {
+        return userRepository.count();
     }
+}
 
 

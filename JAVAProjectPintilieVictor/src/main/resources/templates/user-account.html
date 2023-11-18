@@ -2,16 +2,66 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User Account</title>
+    <style>
+        body {
+            font-family: 'Lobster', cursive;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #444;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            display: inline-block;
+            margin-right: 10px;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #2196F3;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #0d8bf0;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<h1>Welcome, <span th:text="${user.username}"></span>!</h1>
+<h1>Welcome <span th:text="${user.username}"></span>...to you journal of emotions!</h1>
 <a href="/logout">Logout</a>
 <h2>Your Journal Entries:</h2>
+
+<p>You have expressed yourself <span th:text="${entryCount}"></span> times.</p>
+
 <table>
     <thead>
     <tr>
-        <th>Title</th>
-        <th>Content</th>
+        <th>Emotion</th>
+        <th>Description</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -23,17 +73,13 @@
             <a th:href="@{/edit-journal/{entryId}(entryId=${entry.id})}">Edit</a>
             <a th:href="@{/delete-journal/{entryId}(entryId=${entry.id})}">Delete</a>
         </td>
-
-
     </tr>
     </tbody>
 </table>
-<a th:href="@{/add-journal}">Add New Journal Entry</a>
-<a th:href="@{/edit-user}">Edit User Profile</a>
+<a th:href="@{/add-journal}">Add a New Emotion</a>
+<a th:href="@{/edit-user}">Edit Your Identity</a>
 
-
-
-<p>Total registered users: <span th:text="${totalUsers}"></span></p>
-
+<p>There is no shame in having an emotional journal.
+    There are <span th:text="${totalUsers}"></span> of you who do this.</p>
 </body>
 </html>

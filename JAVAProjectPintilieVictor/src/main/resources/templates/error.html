@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Error Page</title>
+  <title>Oh no!</title>
+  <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 20px;
+        }
+        .error-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #FF5722;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            font-weight: bold;
+            margin-top: 30px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .error-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-<h1>An unexpected error occurred</h1>
-<p>Please contact the administrator for assistance.</p>
+<div class="error-container">
+  <h1>Oopsy!!!</h1>
+  <p>Try again and you will succeed.</p>
+  <p>No need to fear the unexpected.</p>
+
+  <div class="error-image">
+    <!-- Place your image source here -->
+    <img src="error-image.jpg" alt="Error Image">
+  </div>
+
+  <div class="contact-info">
+    <p>If you still have problems,</p>
+    <p>You can call our staff at:</p>
+    <p>0720-123-456-789.</p>
+    <p>Or you can email us at:</p>
+    <p>helpdesk4u@journals.eu</p>
+  </div>
+</div>
 </body>
 </html>

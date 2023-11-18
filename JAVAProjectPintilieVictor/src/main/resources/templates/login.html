@@ -2,20 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <style>
+        body {
+            font-family: 'Lobster', cursive;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input {
+            padding: 8px;
+            margin: 6px 0;
+            width: 250px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h1>Login</h1>
+<div class="login-container">
+    <h1>Hello! Ready to login?</h1>
 
-<form th:action="@{/login}" method="post" th:object="${user}">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" th:field="*{username}" />
+    <form th:action="@{/login}" method="post" th:object="${user}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:field="*{username}" />
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" th:field="*{password}" />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:field="*{password}" />
 
-    <button type="submit">Login</button>
-</form>
+        <button type="submit">Login</button>
+    </form>
 
-<p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+    <p>If you`re new, you can <a th:href="@{/register}">register here!</a></p>
+</div>
 </body>
 </html>

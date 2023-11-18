@@ -5,13 +5,15 @@ import com.example.JAVAProjectPintilieVictor.Entities.User;
 import com.example.JAVAProjectPintilieVictor.Services.JournalEntryService;
 import com.example.JAVAProjectPintilieVictor.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -36,6 +38,12 @@ public class UserController {
                 model.addAttribute("user", user);
                 List<JournalEntry> journalEntries = journalEntryService.getAllEntriesForUser(user);
                 model.addAttribute("journalEntries", journalEntries);
+
+                int entryCount = journalEntries.size(); // Retrieve the count of journal entries
+                model.addAttribute("entryCount", entryCount); // Add entry count to the model
+                // Get total number of users
+                Long totalUsers = userService.getTotalUsers();
+                model.addAttribute("totalUsers", totalUsers);
                 return "user-account";
             }
         }
@@ -68,34 +76,16 @@ public class UserController {
         return "redirect:/user-account";
     }
 
-
-    @GetMapping("/delete-account")
-    public String showDeleteAccountConfirmation(Model model, Principal principal) {
-        if (principal != null) {
-            String username = principal.getName();
-            User user = userService.findByUsername(username);
-
-            if (user != null) {
-                model.addAttribute("user", user);
-                return "confirm-delete";
-            }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/delete-account-failed";
+        return "redirect:/login";
     }
 
-    @PostMapping("/delete-account")
-    public String deleteAccount(Principal principal) {
-        if (principal != null) {
-            String username = principal.getName();
-            User user = userService.findByUsername(username);
 
-            if (user != null) {
-                userService.deleteUser(user);
-                return "redirect:/login";
-            }
-        }
-        return "redirect:/delete-account-failed";
-    }
 
     @GetMapping("/journals")
     public String showJournals(Model model, Principal principal) {
@@ -166,13 +156,6 @@ public class UserController {
             }
         }
         return "redirect:/journals";
-    }
-
-    @GetMapping("/user-count")
-    public String getUserCount(Model model) {
-        Long totalUsers = userService.getTotalUsers();
-        model.addAttribute("totalUsers", totalUsers);
-        return "user-count";
     }
 
 }
