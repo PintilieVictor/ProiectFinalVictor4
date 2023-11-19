@@ -158,4 +158,18 @@ public class UserController {
         return "redirect:/journals";
     }
 
+    @PostMapping("/delete-account")
+    public String deleteAccount(Principal principal) {
+        if (principal != null) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+
+            if (user != null) {
+                userService.deleteUser(user);
+                return "redirect:/login";
+            }
+        }
+        return "redirect:/error";
+    }
+
 }

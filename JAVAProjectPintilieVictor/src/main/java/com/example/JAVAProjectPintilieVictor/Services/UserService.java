@@ -54,6 +54,10 @@ public class UserService {
     public Long getTotalUsers() {
         return userRepository.count();
     }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
 }
 
 

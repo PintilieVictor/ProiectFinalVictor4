@@ -55,7 +55,7 @@
 <a href="/logout">Logout</a>
 <h2>Your Journal Entries:</h2>
 
-<p>You have expressed yourself <span th:text="${entryCount}"></span> times.</p>
+<p>You have expressed  <span th:text="${entryCount}"></span> emotions.</p>
 
 <table>
     <thead>
@@ -77,7 +77,7 @@
     </tbody>
 </table>
 <a th:href="@{/add-journal}">Add a New Emotion</a>
-<a th:href="@{/edit-user}">Edit Your Identity</a>
+<a th:href="@{/edit-user}">Change Your Identity!</a>
 
 <p>There is no shame in having an emotional journal.
     There are <span th:text="${totalUsers}"></span> of you who do this.</p>

@@ -74,7 +74,13 @@
   <input type="password" id="password" name="password" th:field="*{password}" />
 
   <button type="submit">Save Changes</button>
+
 </form>
+<form th:action="@{/delete-account}" method="post">
+  <!-- Your form fields here, if required -->
+  <button type="submit">Delete Account</button>
+</form>
+
 <a th:href="@{/user-account}">Back to User Account</a>
 </body>
 </html>
